@@ -1,0 +1,21 @@
+class GFG {
+public void m1()
+{
+System.out.println("No parameter method");
+}
+public void m1(int i)
+{
+System.out.println("Int Parameter");
+}
+public void m1(String s)
+{
+System.out.println("String Parameter");
+}
+}
+public class Main {
+public static void main(String[] args)
+{
+GFG g = new GFG();
+g.m1("A");
+	}
+}
