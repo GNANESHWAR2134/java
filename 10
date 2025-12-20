@@ -2,18 +2,15 @@ importjava.util.LinkedList;
 public class Threadexample { 
 public static void main(String[] args) 
 throwsInterruptedException
-    { 
-       
+{ 
 final PC pc = new PC(); 
-
-        // Create producer thread 
-        Thread t1 = new Thread(new Runnable() { 
-            @Override
+Thread t1 = new Thread(new Runnable() { 
+@Override
 public void run() 
-            { 
+{ 
 try { 
 pc.produce(); 
-                } 
+ } 
 catch (InterruptedException e) { 
 e.printStackTrace(); 
                 } 
@@ -21,8 +18,8 @@ e.printStackTrace();
         }); 
 
         
-        Thread t2 = new Thread(new Runnable() { 
-            @Override
+Thread t2 = new Thread(new Runnable() { 
+ @Override
 public void run() 
             { 
 try { 
@@ -45,56 +42,33 @@ t2.join();
 
     
 public static class PC { 
-
-        
 LinkedList<Integer> list = new LinkedList<>(); 
 int capacity = 2; 
-
-       
 public void produce() throws InterruptedException
         { 
 int value = 0; 
 while (true) { 
 synchronized (this) 
                 { 
-                   
 while (list.size() == capacity) 
 wait(); 
-
-System.out.println("Producer produced-"
-                                       + value); 
-
-                   
+System.out.println("Producer produced-" + value); 
 list.add(value++); 
-
-                    
 notify(); 
-
-                   
 Thread.sleep(1000); 
                 } 
             } 
         } 
-
-        
 public void consume() throws InterruptedException
         { 
 while (true) { 
 synchronized (this) 
                 { 
-                    
 while (list.size() == 0) 
 wait(); 
-
 intval = list.removeFirst(); 
-
-System.out.println("Consumer consumed-"
-                                       + val); 
-
-                    
+System.out.println("Consumer consumed-"+ val); 
 notify(); 
-
-                    
 Thread.sleep(1000); 
                 } 
             } 
